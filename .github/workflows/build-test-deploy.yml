@@ -10,7 +10,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: echo "Starting..."
+      - run: echo "Starting build..."
       - run: npm install
       - run: npm run build 
-      - run: echo "Done!"
+      - run: echo "Done building!"
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: echo "Starting tests..."
+      - run: npm install
+      - run: npm test
+      - run: echo "Done testing!"
